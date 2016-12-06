@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.dennisdarwis.dugem.MainActivity">
+    <item
+        android:id="@+id/deletebookmark"
+        android:orderInCategory="100"
+        android:title="DELETE FROM BOOKMARK"
+        app:showAsAction="always" />
+</menu>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_null"> </string>
+    <string name="app_name">Dugem</string>
+    <string name="action_settings">Settings</string>
+    <string name="bookmark">BOOKMARK</string>
+    <string name="delete">DELETE FROM BOOKMARK</string>
+    <string name="explore">EXPLORE</string>
+    <string name="this_week">THIS WEEK</string>
+    <string name="title_activity_discover">Discover</string>
+    <string name="title_activity_this_week_event">ThisWeekEvent</string>
+    <string name="title_activity_event_detail">EventDetail</string>
+    <string name="add_to_bookmark">ADD TO BOOKMARK</string>
+    <string name="title_activity_bookmark">Bookmark</string>
+    <string name="about">about</string>
+</resources>

@@ -2,10 +2,11 @@
 // Written for SIT207 Android Programing 2nd Assignment
 package com.example.dennisdarwis.dugem;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
 
 /**
  * Created by dennisdarwis on 10/3/16.
@@ -37,6 +38,8 @@ public class EventModel implements Serializable{
         this.eventDetails = eventDetails;
         this.eventTimestamp = timestamp;
     }
+
+
     public int getId(){
         return id;
     }
@@ -100,6 +103,4 @@ public class EventModel implements Serializable{
     public void setEventTimestamp(Date eventTimestamp){
         this.eventTimestamp = eventTimestamp;
     }
-
-
 }

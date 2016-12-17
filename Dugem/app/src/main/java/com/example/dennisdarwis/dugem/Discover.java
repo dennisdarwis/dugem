@@ -3,6 +3,7 @@
 package com.example.dennisdarwis.dugem;
 
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -41,7 +43,7 @@ import java.util.Map;
 
 public class Discover extends Fragment implements Response.ErrorListener, Listener<JSONObject> {
 
-    private List<EventModel> eventModelList = new ArrayList<>();
+    static final List<EventModel> eventModelList = new ArrayList<>();
     private ListViewAdapter listViewAdapter;
     private ListView listView;
     private RequestQueue requestQueue;
@@ -104,7 +106,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
             @Override
             public void onRefresh() {
                 // in every request, the List must be emptied first, to avoid duplication
-                eventModelList = new ArrayList<>();
+                eventModelList.clear();
                 //Refreshing data on server
                 jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 requestQueue.add(jsonRequest);

@@ -13,10 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
+import java.io.Serializable;
+import java.sql.Date;
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -56,30 +63,35 @@ public class ListViewAdapter extends BaseAdapter {
             // ListViewAdapter is using list_view layout.
             view = inflater.inflate(R.layout.list_view, null);
         }
-        TextView eventNameVenue = (TextView) view.findViewById(R.id.eventNameVenue);
-        TextView eventPriceDate = (TextView) view.findViewById(R.id.eventPriceDate);
+        LinearLayout event = (LinearLayout) view.findViewById(R.id.event);
+        TextView textDate = (TextView) view.findViewById(R.id.textDate);
+        TextView textEventName = (TextView) view.findViewById(R.id.textEventName);
+        TextView textEventVenue = (TextView) view.findViewById(R.id.textEventVenue);
+        TextView textEventPrice = (TextView) view.findViewById(R.id.textEventPrice);
         ImageButton eventImage = (ImageButton) view.findViewById(R.id.eventImage);
-        /** BOOKMARK STAR
-        final ImageButton bookmarkButton = (ImageButton) view.findViewById(R.id.bookmarkButton);
-         */
-        dbHandler = new DBHandler(activity.getApplicationContext());
 
-        boolean bool = true;
-        // each data model will be following the list_view layout.
         final EventModel eventModel = eventModelList.get(i);
-        /** BOOKMARK STAR
-        if(eventModel.getId()%2==0){
-            bookmarkButton.setImageResource(R.drawable.ic_star_border_black_24dp);
-        } else{
-            bookmarkButton.setImageResource(R.drawable.ic_star_black_24dp);
-        }
-         */
-        eventNameVenue.setText(eventModel.getEventName()+" - "+eventModel.getVenueName());
-        eventPriceDate.setText(String.valueOf(eventModel.getEventPrice())+" AUD"+" - "+eventModel.getEventTimestamp().toString());
+        Date timestamp = eventModel.getEventTimestamp();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(timestamp);
+        int month = cal.get(Calendar.MONTH)-1;
+        int date = cal.get(Calendar.DAY_OF_MONTH);
+        int year = cal.get(Calendar.YEAR);
+        textDate.setText(String.valueOf(date)+" "+new DateFormatSymbols().getMonths()[month]+", "+String.valueOf(year));
+        textEventName.setText(eventModel.getEventName());
+        textEventVenue.setText(eventModel.getVenueName());
+        textEventPrice.setText(String.valueOf(eventModel.getEventPrice())+" AUD");
         Picasso.with(activity.getApplicationContext()).load(eventModel.getImageUrl()).into(eventImage);
         // imagebutton eventImage will go into eventDetail once it's clicked
         eventImage.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View view) {
+                Log.d("tot", eventModel.getEventDetails());
+                toEventDetail(eventModel);
+            }
+        });
+        event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("tot", eventModel.getEventDetails());
@@ -93,7 +105,7 @@ public class ListViewAdapter extends BaseAdapter {
     private void toEventDetail(EventModel eventModel) {
         Intent intent = new Intent(activity, EventDetail.class);
         // the serialized eventModel will be put for EventDetail activity
-        intent.putExtra("eventModel", eventModel);
+        intent.putExtra("eventModel", (Serializable) eventModel);
         activity.startActivity(intent);
     }
 

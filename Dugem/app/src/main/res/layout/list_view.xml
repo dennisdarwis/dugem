@@ -9,9 +9,13 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:weightSum="1"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="0.09"
         android:layout_height="220dp"
-        android:background="#303030"
-        android:weightSum="1">
+        android:elevation="22dp"
+        android:background="?attr/selectableItemBackground"
+        android:id="@+id/event">
 
         <RelativeLayout
             android:orientation="vertical"
@@ -49,47 +53,69 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="59dp">
+            android:layout_height="88dp"
+            android:orientation="vertical"
+            android:paddingTop="15sp"
+            android:paddingLeft="15sp"
+            android:paddingRight="15sp"
+            android:background="#303030">
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="1">
 
                 <TextView
+                    android:text="Date Month, Year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Event Name  -  Event Venue"
-                    android:id="@+id/eventNameVenue"
+                    android:id="@+id/textDate"
                     android:textColor="#FFFFFF"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:weightSum="1">
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif"
+                    android:alpha="0.5" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:text="Event Name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Event Price  -  Event Date"
-                    android:id="@+id/eventPriceDate"
+                    android:id="@+id/textEventName"
+                    android:layout_weight="1"
                     android:textColor="#FFFFFF"
-                    android:layout_centerVertical="true"
-                    android:layout_alignLeft="@+id/eventNameVenue"
-                    android:layout_alignStart="@+id/eventNameVenue"
-                    android:layout_marginLeft="10dp" />
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:text="Event Location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textEventVenue"
+                        android:layout_weight="1"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:alpha="0.7" />
+
+                    <TextView
+                        android:text="Event Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textEventPrice"
+                        android:layout_weight="1"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textAlignment="textEnd"
+                        android:alpha="0.5" />
+                </LinearLayout>
 
             </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

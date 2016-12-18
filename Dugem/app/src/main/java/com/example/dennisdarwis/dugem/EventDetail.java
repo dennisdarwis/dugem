@@ -74,6 +74,8 @@ public class EventDetail extends AppCompatActivity {
         textDate.setText(String.valueOf(date)+" "+new DateFormatSymbols().getMonths()[month]+" "+String.valueOf(year));
         TextView textEventVenue = (TextView) findViewById(R.id.textEventVenue);
         textEventVenue.setText(eventModel.getVenueName());
+        TextView textEventAddress = (TextView) findViewById(R.id.textEventAddress);
+        textEventAddress.setText(eventModel.getAddress());
         TextView textEventUrl = (TextView) findViewById(R.id.textEventUrl);
         textEventUrl.setText(eventModel.getEventUrl());
         TextView textEventDetails = (TextView) findViewById(R.id.textEventDetails);

@@ -43,15 +43,16 @@ import java.util.Map;
 
 public class Discover extends Fragment implements Response.ErrorListener, Listener<JSONObject> {
 
-    static final List<EventModel> eventModelList = new ArrayList<>();
+    static List<EventModel> eventModelList = new ArrayList<>();
     private ListViewAdapter listViewAdapter;
     private ListView listView;
     private RequestQueue requestQueue;
     private SwipeRefreshLayout swipeRefreshLayout = null;
     // limit is the amount of events loaded from server.
     private int limit = 64;
-    private int offset = 0;
+    static int offset = 0;
     private int total;
+    static Parcelable state;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,7 +85,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
                         && this.currentScrollState == SCROLL_STATE_IDLE && totalItem != total) {
                     Log.d("TOTALITEM", String.valueOf(totalItem)+" "+String.valueOf(currentFirstVisibleItem));
                     swipeRefreshLayout.setRefreshing(true);
-                    reload();
+                    loadMore();
                 }
             }
         });
@@ -92,6 +93,13 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
         listViewAdapter = new ListViewAdapter(getActivity(), eventModelList);
         // the listviewadapter that contains the events data from eventModelList will be adapted into listview
         listView.setAdapter(listViewAdapter);
+        if(state != null) {
+            Log.d("BLABLA", "trying to restore listview state..");
+            listView.onRestoreInstanceState(state);
+        } else{
+            Log.d("BLABLA", "HALAH KUNTUL ");
+        }
+
         //listView.setSelection(eventModelList.size()-6);
         // String URL
         String url = "http://104.199.155.15/api/v2/db/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
@@ -99,7 +107,10 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Listener<JSONObject>) this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         // the CustomJSONObjectRequest is put into requestQueue for process.
-        requestQueue.add(jsonRequest);
+        if(eventModelList.size() == 0){
+            requestQueue.add(jsonRequest);
+            offset=0;
+        }
         // swipeRefreshLayout for refreshing list of event objects once it is swiped down.
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -118,7 +129,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
 
     }
 
-    private void reload() {
+    private void loadMore() {
         // Execute LoadMoreDataTask AsyncTask
         offset=offset+64;
         String url = "http://104.199.155.15/api/v2/db/_table/dugem?limit="+limit+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
@@ -126,6 +137,12 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(jsonRequest);
         //listView.setSelection(eventModelList.size()-6);
+    }
+    @Override
+    public void onPause(){
+        //to save the current scroll position once the user goes into other activity and go back into the list view
+        state = listView.onSaveInstanceState();
+        super.onPause();
     }
 
     @Override

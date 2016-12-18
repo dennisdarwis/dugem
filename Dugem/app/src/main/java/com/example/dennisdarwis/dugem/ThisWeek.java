@@ -2,6 +2,7 @@
 // Written for SIT207 Android Programing 2nd Assignment
 package com.example.dennisdarwis.dugem;
 
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,7 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
     private ListView listView;
     private RequestQueue requestQueue;
     private SwipeRefreshLayout swipeRefreshLayout = null;
+    static Parcelable state;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,6 +79,13 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
             }
         });
         return view;
+    }
+
+    @Override
+    public void onPause(){
+        //to save the current scroll position once the user goes into other activity and go back into the list view
+        state = listView.onSaveInstanceState();
+        super.onPause();
     }
 
     @Override

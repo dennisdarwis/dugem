@@ -91,9 +91,7 @@ public class EventDetail extends AppCompatActivity {
         buttonToMap1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Snackbar.make(findViewById(android.R.id.content), "Address copied", Snackbar.LENGTH_SHORT)
-                        .setActionTextColor(Color.BLACK)
-                        .show();
+
                 ClipData myClip = ClipData.newPlainText("address", eventModel.getAddress());
                 myClipboard.setPrimaryClip(myClip);
                 return true;
@@ -103,9 +101,7 @@ public class EventDetail extends AppCompatActivity {
         buttonToWebsite1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Snackbar.make(findViewById(android.R.id.content), "Website address copied", Snackbar.LENGTH_SHORT)
-                        .setActionTextColor(Color.BLACK)
-                        .show();
+
                 ClipData myClip = ClipData.newPlainText("web address", eventModel.getEventUrl());
                 myClipboard.setPrimaryClip(myClip);
                 return true;

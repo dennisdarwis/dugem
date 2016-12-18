@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.dennisdarwis.dugem.EventDetail"
     tools:showIn="@layout/activity_event_detail"
@@ -21,94 +19,307 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:id="@+id/content"
+            android:focusableInTouchMode="true">
+
             <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="300dp"
+                android:layout_width="match_parent"
                 android:id="@+id/eventImage"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="15.30" />
+                android:layout_height="200dp"
+                android:background="@android:color/transparent"
+                android:elevation="0dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Event Name"
-                android:id="@+id/eventNameVenue"
-                android:textIsSelectable="true"
-                android:textColor="#FFFFFF"
-                android:textColorHighlight="#424242"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Event Venue"
-                android:id="@+id/eventVenue"
-                android:textIsSelectable="true"
-                android:textColor="#FFFFFF"
-                android:textColorHighlight="#424242"/>
+                <TextView
+                    android:text="Event Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textEventName"
+                    android:layout_weight="15.30"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Event Address"
-                android:id="@+id/eventAddress"
-                android:textIsSelectable="true"
-                android:textColor="#FFFFFF"
-                android:textColorHighlight="#424242"/>
+                <TextView
+                    android:text="starts from 0 AUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textEventPrice"
+                    android:layout_weight="15.30"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:alpha="0.7"
+                    android:elevation="19dp" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Event Price"
-                android:id="@+id/eventPrice"
-                android:textIsSelectable="true"
-                android:textColor="#FFFFFF"
-                android:textColorHighlight="#424242"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Event Contact"
-                android:id="@+id/eventContact"
-                android:textIsSelectable="true"
-                android:textColor="#FFFFFF"
-                android:textColorHighlight="#424242"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Event Details"
-                android:id="@+id/eventDetails"
-                android:textIsSelectable="true"
-                android:textColor="#FFFFFF"
-                android:textColorHighlight="#424242"/>
-
-            <Button
+            <View
+                android:layout_height="1dp"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Go to Website"
-                android:id="@+id/buttonToWebsite"
-                android:layout_gravity="center_horizontal"
-                android:background="#424242"
-                android:textColor="#FFFFFF" />
-            <Button
+                android:background="#FFFFFF"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:alpha="0.5" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="15.30"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        app:srcCompat="@drawable/ic_date_range_black_48dp"
+                        android:id="@+id/imageCalendar"
+                        android:tint="#FFFFFF"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp" />
+
+                    <TextView
+                        android:text="Date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textDate"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="15.30">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/buttonToMap1"
+                        android:clickable="true"
+                        android:background="@drawable/ripple">
+                        <ImageView
+                            app:srcCompat="@drawable/ic_location_on_black_48dp"
+                            android:id="@+id/imagePointer"
+                            android:tint="#FFFFFF"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp">
+
+                            <TextView
+                                android:text="Event Venue"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/textEventVenue"
+                                android:layout_weight="1"
+                                android:textSize="16sp"
+                                android:textColor="#FFFFFF"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:text="Event Address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textEventAddress"
+                                android:layout_weight="1"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:alpha="0.7" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/buttonToWebsite1"
+                        android:clickable="true"
+                        android:background="@drawable/ripple">
+                        <ImageView
+                            app:srcCompat="@drawable/ic_link_black_48dp"
+                            android:id="@+id/imageLink"
+                            android:tint="#FFFFFF"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp">
+
+                            <TextView
+                                android:text="Booking/Ticket"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/textBookingTicket"
+                                android:layout_weight="1"
+                                android:textSize="16sp"
+                                android:textColor="#FFFFFF"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:text="Event URL"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textEventUrl"
+                                android:layout_weight="1"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:alpha="0.7" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_height="1dp"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Go to Map Direction"
-                android:id="@+id/buttonToMap"
-                android:layout_gravity="center_horizontal"
-                android:background="#424242"
-                android:textColor="#FFFFFF"
-                android:layout_marginTop="5dp" />
+                android:background="#FFFFFF"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:alpha="0.5" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:text="Event Details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView7"
+                    android:textColor="#FFFFFF"
+                    android:alpha="0.7"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:text="Event Details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textEventDetails"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="5dp"
+                    android:textIsSelectable="true"
+                    android:textColorHighlight="#424242"
+                    android:textColorHint="#000000"
+                    android:textCursorDrawable="@null" />
+
+                <TextView
+                    android:text="Contact Details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView8"
+                    android:textColor="#FFFFFF"
+                    android:alpha="0.7"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:text="Event Contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textEventContact"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="5dp"
+                    android:textIsSelectable="true"
+                    android:textColorHighlight="#424242" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_height="1dp"
+                android:layout_width="fill_parent"
+                android:background="#FFFFFF"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:alpha="0.5" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="20dp">
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="#424242"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="2.5dp">
+
+                    <Button
+                        android:text="Map Location"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/buttonToMap2"
+                        android:clickable="true"
+                        android:background="@drawable/ripple"
+                        android:textColor="#FFFFFF"
+                        android:layout_weight="0.5"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="#424242"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="2.5dp">
+
+                    <Button
+                        android:text="Event Website"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/buttonToWebsite2"
+                        android:background="#424242"
+                        android:textColor="#FFFFFF"
+                        android:layout_weight="0.5"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
-
 
 
 </LinearLayout>

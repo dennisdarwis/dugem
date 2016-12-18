@@ -77,10 +77,17 @@ public class ListViewAdapter extends BaseAdapter {
         int month = cal.get(Calendar.MONTH)-1;
         int date = cal.get(Calendar.DAY_OF_MONTH);
         int year = cal.get(Calendar.YEAR);
-        textDate.setText(String.valueOf(date)+" "+new DateFormatSymbols().getMonths()[month]+", "+String.valueOf(year));
+        textDate.setText(String.valueOf(date)+" "+new DateFormatSymbols().getMonths()[month]+" "+String.valueOf(year));
         textEventName.setText(eventModel.getEventName());
         textEventVenue.setText(eventModel.getVenueName());
-        textEventPrice.setText(String.valueOf(eventModel.getEventPrice())+" AUD");
+
+        if(eventModel.getEventPrice() == 0){
+            String price = "FREE ENTRY";
+            textEventPrice.setText(price);
+        } else{
+            String price = String.valueOf(eventModel.getEventPrice())+" AUD";
+            textEventPrice.setText(price);
+        }
         Picasso.with(activity.getApplicationContext()).load(eventModel.getImageUrl()).into(eventImage);
         // imagebutton eventImage will go into eventDetail once it's clicked
         eventImage.setOnClickListener(new View.OnClickListener(){

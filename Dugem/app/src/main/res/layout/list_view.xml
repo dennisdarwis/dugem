@@ -10,12 +10,12 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:weightSum="1"
-        android:layout_marginBottom="5dp"
         android:layout_weight="0.09"
         android:layout_height="220dp"
         android:elevation="22dp"
         android:background="?attr/selectableItemBackground"
-        android:id="@+id/event">
+        android:id="@+id/event"
+        android:layout_marginTop="5dp">
 
         <RelativeLayout
             android:orientation="vertical"

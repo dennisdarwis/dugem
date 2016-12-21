@@ -11,6 +11,6 @@
     <string name="title_activity_event_detail">EventDetail</string>
     <string name="add_to_bookmark">ADD TO BOOKMARK</string>
     <string name="title_activity_bookmark">Bookmark</string>
-    <string name="about">about</string>
+    <string name="about">About Dugem</string>
     <string name="title_activity_about">About</string>
 </resources>

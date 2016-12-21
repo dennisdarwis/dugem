@@ -124,13 +124,15 @@ public class MainActivity extends AppCompatActivity{
             Log.d("note", "BOOKMARK BUTTON");
             toBookMark();
         }
-        if(id==R.id.video){
-            String uri = "https://youtu.be/3qibE1yyL3c"; //changed video link
+        if(id==R.id.about){
+            /**String uri = "https://youtu.be/3qibE1yyL3c"; //changed video link
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-            startActivity(intent);
+            startActivity(intent);*/
+            toAbout();
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
         SharedPreferences prefs = getBaseContext().getSharedPreferences(
@@ -170,6 +172,10 @@ public class MainActivity extends AppCompatActivity{
     private void toBookMark() {
         Intent intent = new Intent(this, Bookmark.class);
         intent.putExtra("delete", false);
+        startActivity(intent);
+    }
+    private void toAbout() {
+        Intent intent = new Intent(this, About.class);
         startActivity(intent);
     }
 }

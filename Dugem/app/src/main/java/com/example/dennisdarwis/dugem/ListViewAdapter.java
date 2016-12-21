@@ -74,7 +74,7 @@ public class ListViewAdapter extends BaseAdapter {
         Date timestamp = eventModel.getEventTimestamp();
         Calendar cal = Calendar.getInstance();
         cal.setTime(timestamp);
-        int month = cal.get(Calendar.MONTH)-1;
+        int month = cal.get(Calendar.MONTH);
         int date = cal.get(Calendar.DAY_OF_MONTH);
         int year = cal.get(Calendar.YEAR);
         textDate.setText(String.valueOf(date)+" "+new DateFormatSymbols().getMonths()[month]+" "+String.valueOf(year));

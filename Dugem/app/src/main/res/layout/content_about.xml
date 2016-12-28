@@ -17,17 +17,17 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/dugemlogo"
-        android:id="@+id/imageView"
-        android:layout_weight="0.36" />
+        android:layout_height="157dp"
+        app:srcCompat="@mipmap/dugemwhite"
+        android:id="@+id/imageView" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textAbout"
         android:textColor="#FFFFFF"
-        android:text="Dugem(/duːgəm/; doog'em or duug'em in english pronunciation), is an abbreviation of Dunia(World) and Gemerlap(Sparlking), for Dunia Gemerlap(Sparkling World), is a slang term for nightclub parties/events in Bahasa Indonesia. " />
+        android:text="Dugem(/duːgəm/; doog'em or duug'em in english pronunciation), is an abbreviation of Dunia(World) and Gemerlap(Sparlking), for Dunia Gemerlap(Sparkling World), is a slang term for nightclub parties/events in Bahasa Indonesia. "
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:text="This application was intentionally developed for University assignment, and then it comes an idea to publish the app in hopes to help Melbournians looking for their nightlife destination."
@@ -38,7 +38,7 @@
         android:layout_marginTop="10dp" />
 
     <TextView
-        android:text="For questions, feedback, or suggestions, you can contact"
+        android:text="If you want your event to be listed, and For questions, feedback, or suggestions, you can contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView3"

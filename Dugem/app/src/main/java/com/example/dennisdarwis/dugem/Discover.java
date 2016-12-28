@@ -102,7 +102,8 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
 
         //listView.setSelection(eventModelList.size()-6);
         // String URL
-        String url = "http://104.199.155.15/api/v2/db/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
+        //String url = "http://104.199.155.15/api/v2/db/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
         // CustomJSONObjectRequest as jsonRequest, contains headers required for API Request
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Listener<JSONObject>) this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
@@ -132,7 +133,9 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
     private void loadMore() {
         // Execute LoadMoreDataTask AsyncTask
         offset=offset+64;
-        String url = "http://104.199.155.15/api/v2/db/_table/dugem?limit="+limit+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
+
+        //String url = "http://104.199.155.15/api/v2/db/_table/dugem?limit="+limit+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+limit+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Listener<JSONObject>) this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(jsonRequest);
@@ -158,15 +161,16 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
             JSONArray jsonArray = response.getJSONArray("resource");
             JSONObject jsonObject = response.getJSONObject("meta");
             total = jsonObject.getInt("count");
-            Log.d("TOTAL", String.valueOf(total));
+            Log.d("TOTAL", String.valueOf(total)+" "+jsonArray.length());
             for (int i=0; i < jsonArray.length(); i++){
                 // each object will be parsed
                 JSONObject resource = jsonArray.getJSONObject(i);
                 // parsing every variable of events.
                 int id = resource.getInt("id");
-                int eventPrice = resource.getInt("eventPrice");
+                Log.d("id", String.valueOf(id));
+                Double eventPrice = resource.getDouble("eventPrice");
                 String eventName = resource.getString("eventName");
-                String imageUrl = resource.getString("ImageUrl");
+                String imageUrl = resource.getString("imageUrl");
                 String eventUrl = resource.getString("eventUrl");
                 String venueName = resource.getString("venueName");
                 String address = resource.getString("address");
@@ -174,14 +178,18 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
                 String eventDetails = resource.getString("eventDetails");
                 Date eventTimestamp = Date.valueOf(resource.getString("eventTimestamp"));
                 int venueId = resource.getInt("venueId");
-                Log.d("ASU", "onResponse: "+eventName);
+                String eventTimeStart = resource.getString("eventTimeStart");
+                String eventTimeEnd = resource.getString("eventTimeEnd");
+                Double latitude = resource.getDouble("latitude");
+                Double longitude = resource.getDouble("longitude");
+                String city = resource.getString("city");
                 // each parsed variable will be put for new data model
-                EventModel data = new EventModel(id, venueId, eventPrice, eventName, imageUrl, eventUrl, venueName, address, contact, eventDetails, eventTimestamp);
+                EventModel data = new EventModel(id, venueId, eventPrice, eventName, imageUrl, eventUrl, venueName, address, contact, eventDetails, eventTimestamp, eventTimeStart, eventTimeEnd, latitude, longitude, city);
                 // each data model will be put into the list
                 eventModelList.add(data);
                 Log.d("DATA", data.toString());
             }
-            Log.d("tot", "TOT: "+eventModelList.toString());
+            Log.d("tot", "TOTSKI: "+eventModelList.toString());
             // notifyDataSetChanged(), to change into another added data to list of data
             listViewAdapter.notifyDataSetChanged();
             // once the request is complete, the refresh animation is stopped

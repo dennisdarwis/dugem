@@ -16,12 +16,14 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:weightSum="1">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:id="@+id/icon"
-            android:src="@mipmap/dugemlogo"
-            android:layout_height="45dp" />
+            android:src="@mipmap/dugemwhite"
+            android:layout_weight="0.04"
+            android:layout_height="30dp" />
     </android.support.v7.widget.Toolbar>
 
 

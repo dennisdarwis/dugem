@@ -43,7 +43,7 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_this_week, container, false);
         requestQueue = Volley.newRequestQueue(getContext());
-        String url = "http://104.199.155.15/api/v2/db/_table/dugem?order=eventTimestamp%20DESC";
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?api_key=62220ea2b6d61eb7aca380d40801ffccbc08bec358c72843023f626774493ac9&order=eventTimestamp%20DESC";
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -65,6 +65,12 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
 
             }
         });
+        if(state != null) {
+            Log.d("BLABLA", "trying to restore listview state..");
+            listView.onRestoreInstanceState(state);
+        } else{
+            Log.d("BLABLA", "HALAH KUNTUL ");
+        }
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Response.Listener<JSONObject>) this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(jsonRequest);
@@ -108,18 +114,22 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
                 Date eventTimestamp = Date.valueOf(resource.getString("eventTimestamp"));
                 if(eventTimestamp.after(currentTime.getTime()) && eventTimestamp.before(nextWeek.getTime())){
                     int id = resource.getInt("id");
-                    int eventPrice = resource.getInt("eventPrice");
+                    Double eventPrice = resource.getDouble("eventPrice");
                     String eventName = resource.getString("eventName");
-                    String imageUrl = resource.getString("ImageUrl");
+                    String imageUrl = resource.getString("imageUrl");
                     String eventUrl = resource.getString("eventUrl");
                     String venueName = resource.getString("venueName");
                     String address = resource.getString("address");
                     String contact = resource.getString("contact");
                     String eventDetails = resource.getString("eventDetails");
-
                     int venueId = resource.getInt("venueId");
+                    String eventTimeStart = resource.getString("eventTimeStart");
+                    String eventTimeEnd = resource.getString("eventTimeEnd");
+                    Double latitude = resource.getDouble("latitude");
+                    Double longitude = resource.getDouble("longitude");
+                    String city = resource.getString("city");
                     Log.d("ASU", "onResponse: "+eventName);
-                    EventModel data = new EventModel(id, venueId, eventPrice, eventName, imageUrl, eventUrl, venueName, address, contact, eventDetails, eventTimestamp);
+                    EventModel data = new EventModel(id, venueId, eventPrice, eventName, imageUrl, eventUrl, venueName, address, contact, eventDetails, eventTimestamp, eventTimeStart, eventTimeEnd, latitude, longitude, city);
                     eventModelList.add(data);
                     Log.d("DATA", data.toString());
                 }

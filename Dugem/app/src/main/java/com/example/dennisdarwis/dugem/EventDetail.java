@@ -5,11 +5,13 @@ package com.example.dennisdarwis.dugem;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -93,9 +95,16 @@ public class EventDetail extends AppCompatActivity {
         buttonToMap1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-
-                ClipData myClip = ClipData.newPlainText("address", eventModel.getAddress());
-                myClipboard.setPrimaryClip(myClip);
+                AlertDialog alertDialog = new AlertDialog.Builder(EventDetail.this).create();
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Copy Address",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                ClipData myClip = ClipData.newPlainText("address", eventModel.getAddress());
+                                myClipboard.setPrimaryClip(myClip);
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
                 return true;
             }
         });
@@ -103,9 +112,16 @@ public class EventDetail extends AppCompatActivity {
         buttonToWebsite1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-
-                ClipData myClip = ClipData.newPlainText("web address", eventModel.getEventUrl());
-                myClipboard.setPrimaryClip(myClip);
+                AlertDialog alertDialog = new AlertDialog.Builder(EventDetail.this).create();
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Copy Website Address",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                ClipData myClip = ClipData.newPlainText("web address", eventModel.getEventUrl());
+                                myClipboard.setPrimaryClip(myClip);
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
                 return true;
             }
         });
@@ -183,11 +199,7 @@ public class EventDetail extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
+
 
     private void toBookmark() {
         Intent intent = new Intent(this, Bookmark.class);

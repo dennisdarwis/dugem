@@ -15,17 +15,24 @@ import java.sql.Date;
 public class EventModel implements Serializable{
     private int id;
     private int venueId;
-    private int eventPrice;
+    private double eventPrice;
+    private double latitude;
+    private double longitude;
     private String eventName;
     private String imageUrl;
     private String eventUrl;
     private String venueName;
     private String address;
+    private String city;
     private String contact;
     private String eventDetails;
     private Date eventTimestamp;
+    private String eventTimeStart;
+    private String eventTimeEnd;
 
-    public EventModel(int id, int venueId, int eventPrice, String eventName, String imageUrl, String eventUrl, String venueName, String address, String contact, String eventDetails, Date timestamp){
+    public EventModel(int id, int venueId, double eventPrice, String eventName, String imageUrl, String eventUrl,
+                      String venueName, String address, String contact, String eventDetails, Date timestamp,
+                      String eventTimeStart, String eventTimeEnd, double latitude, double longitude, String city){
         this.id = id;
         this.venueId = venueId;
         this.eventPrice = eventPrice;
@@ -37,6 +44,11 @@ public class EventModel implements Serializable{
         this.contact = contact;
         this.eventDetails = eventDetails;
         this.eventTimestamp = timestamp;
+        this.eventTimeStart = eventTimeStart;
+        this.eventTimeEnd = eventTimeEnd;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.city = city;
     }
 
 
@@ -52,11 +64,23 @@ public class EventModel implements Serializable{
     public void setVenueId(int venueId){
         this.venueId = venueId;
     }
-    public int getEventPrice(){
+    public double getEventPrice(){
         return eventPrice;
     }
-    public void setEventPrice(int eventPrice){
+    public void setEventPrice(double eventPrice){
         this.eventPrice = eventPrice;
+    }
+    public double getLatitude(){
+        return latitude;
+    }
+    public void setLatitude(double latitude){
+        this.latitude = latitude;
+    }
+    public double getLongitude(){
+        return longitude;
+    }
+    public void setLongitude(double longitude){
+        this.longitude = longitude;
     }
     public String getEventName(){
         return eventName;
@@ -102,5 +126,29 @@ public class EventModel implements Serializable{
     }
     public void setEventTimestamp(Date eventTimestamp){
         this.eventTimestamp = eventTimestamp;
+    }
+
+    public String getEventTimeStart() {
+        return eventTimeStart;
+    }
+
+    public void setEventTimeStart(String eventTimeStart) {
+        this.eventTimeStart = eventTimeStart;
+    }
+
+    public String getEventTimeEnd() {
+        return eventTimeEnd;
+    }
+
+    public void setEventTimeEnd(String eventTimeEnd) {
+        this.eventTimeEnd = eventTimeEnd;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

@@ -65,6 +65,7 @@ public class ListViewAdapter extends BaseAdapter {
         }
         LinearLayout event = (LinearLayout) view.findViewById(R.id.event);
         TextView textDate = (TextView) view.findViewById(R.id.textDate);
+
         TextView textEventName = (TextView) view.findViewById(R.id.textEventName);
         TextView textEventVenue = (TextView) view.findViewById(R.id.textEventVenue);
         TextView textEventPrice = (TextView) view.findViewById(R.id.textEventPrice);
@@ -78,6 +79,7 @@ public class ListViewAdapter extends BaseAdapter {
         int date = cal.get(Calendar.DAY_OF_MONTH);
         int year = cal.get(Calendar.YEAR);
         textDate.setText(String.valueOf(date)+" "+new DateFormatSymbols().getMonths()[month]+" "+String.valueOf(year));
+
         textEventName.setText(eventModel.getEventName());
         textEventVenue.setText(eventModel.getVenueName());
 

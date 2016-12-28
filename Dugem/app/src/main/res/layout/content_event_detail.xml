@@ -74,37 +74,53 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="15.30"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp">
-
-                    <ImageView
-                        app:srcCompat="@drawable/ic_date_range_black_48dp"
-                        android:id="@+id/imageCalendar"
-                        android:tint="#FFFFFF"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp" />
-
-                    <TextView
-                        android:text="Date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:id="@+id/textDate"
-                        android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:textColor="#FFFFFF"
-                        android:layout_marginLeft="5dp"
-                        android:gravity="center_vertical" />
-                </LinearLayout>
-
-                <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="15.30">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:clickable="true"
+                        android:background="@drawable/ripple">
+                        <ImageView
+                            app:srcCompat="@drawable/ic_date_range_black_48dp"
+                            android:id="@+id/imageCalendar"
+                            android:tint="#FFFFFF"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp">
+
+                            <TextView
+                                android:text="Date"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/textDate"
+                                android:layout_weight="1"
+                                android:textSize="16sp"
+                                android:textColor="#FFFFFF"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:text="Event Time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textEventTime"
+                                android:layout_weight="1"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:alpha="0.7" />
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:orientation="horizontal"

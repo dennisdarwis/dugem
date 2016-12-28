@@ -74,6 +74,8 @@ public class EventDetail extends AppCompatActivity {
         int date = cal.get(Calendar.DAY_OF_MONTH);
         int year = cal.get(Calendar.YEAR);
         textDate.setText(String.valueOf(date)+" "+new DateFormatSymbols().getMonths()[month]+" "+String.valueOf(year));
+        TextView textEventTime = (TextView) findViewById(R.id.textEventTime);
+        textEventTime.setText(eventModel.getEventTimeStart()+" - "+eventModel.getEventTimeEnd());
         TextView textEventVenue = (TextView) findViewById(R.id.textEventVenue);
         textEventVenue.setText(eventModel.getVenueName());
         TextView textEventAddress = (TextView) findViewById(R.id.textEventAddress);

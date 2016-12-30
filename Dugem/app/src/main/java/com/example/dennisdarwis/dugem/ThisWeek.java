@@ -43,7 +43,7 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_this_week, container, false);
         requestQueue = Volley.newRequestQueue(getContext());
-        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?api_key=62220ea2b6d61eb7aca380d40801ffccbc08bec358c72843023f626774493ac9&order=eventTimestamp%20DESC";
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?api_key=62220ea2b6d61eb7aca380d40801ffccbc08bec358c72843023f626774493ac9&order=eventTimestamp%20ASC";
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override

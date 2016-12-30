@@ -30,7 +30,7 @@
                 android:background="@android:color/transparent"
                 android:elevation="0dp"
                 android:layout_gravity="center"
-                android:scaleType="fitCenter" />
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:orientation="vertical"

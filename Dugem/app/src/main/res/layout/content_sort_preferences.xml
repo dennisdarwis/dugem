@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_sort_preferences"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.dennisdarwis.dugem.SortPreferences"
+    tools:showIn="@layout/activity_sort_preferences"
+    android:background="#212121">
+
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp">
+
+        <RadioButton
+            android:text="Date(Ascending)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButtonDateAscending"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
+            android:checked="false"
+            android:layout_marginTop="5dp" />
+
+        <RadioButton
+            android:text="Date(Descending)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButtonDateDescending"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
+            android:checked="false"
+            android:layout_marginTop="5dp" />
+
+        <RadioButton
+            android:text="Price(Low to High)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButtonPriceLoHi"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
+            android:checked="false"
+            android:layout_marginTop="5dp" />
+
+        <RadioButton
+            android:text="Price(High to Low)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButtonPriceHiLo"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
+            android:checked="false"
+            android:layout_marginTop="5dp" />
+
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:background="#424242"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp">
+
+        <Button
+            android:text="Apply Changes"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/buttonApplySort"
+            android:clickable="true"
+            android:background="@drawable/ripple"
+            android:textColor="#FFFFFF"
+            android:layout_weight="0.5"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+</LinearLayout>

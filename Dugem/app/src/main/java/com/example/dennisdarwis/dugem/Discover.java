@@ -2,6 +2,8 @@
 // Written for SIT207 Android Programing 2nd Assignment
 package com.example.dennisdarwis.dugem;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -11,10 +13,14 @@ import android.os.Bundle;
 import android.util.EventLog;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -53,10 +59,14 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
     static int offset = 0;
     private int total;
     static Parcelable state;
+    Boolean fromSortPrefs;
+    static String sortPreferences = "&order=eventTimestamp%20ASC";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_discover, container, false);
+        setHasOptionsMenu(true);
+        Bundle bundle = getActivity().getIntent().getExtras();
         //creating new requestQueue, to get event objects from google cloud
         requestQueue = Volley.newRequestQueue(getContext());
         listView = (ListView) view.findViewById(R.id.listView);
@@ -102,16 +112,27 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
 
         //listView.setSelection(eventModelList.size()-6);
         // String URL
-        //String url = "http://104.199.155.15/api/v2/db/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
-        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+"&order=eventTimestamp%20DESC";
         // CustomJSONObjectRequest as jsonRequest, contains headers required for API Request
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Listener<JSONObject>) this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        // the CustomJSONObjectRequest is put into requestQueue for process.
-        if(eventModelList.size() == 0){
-            requestQueue.add(jsonRequest);
-            offset=0;
+
+        if(bundle!=null){
+            fromSortPrefs = bundle.getBoolean("fromSortPrefs", false);
+            if(fromSortPrefs){
+                final SharedPreferences prefs = getActivity().getSharedPreferences(
+                        "prefs", getActivity().getApplicationContext().MODE_PRIVATE);
+                sortPreferences = prefs.getString("sortPreferences", "&order=eventTimestamp%20ASC");
+                reload(sortPreferences);
+            }
+        } else{
+            // the CustomJSONObjectRequest is put into requestQueue for process.
+            if(eventModelList.size() == 0){
+                requestQueue.add(jsonRequest);
+                offset=0;
+            }
         }
+
         // swipeRefreshLayout for refreshing list of event objects once it is swiped down.
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -130,10 +151,58 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
 
     }
 
+    private void reload(String sortPreferences) {
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+sortPreferences;
+        // in every request, the List must be emptied first, to avoid duplication
+        eventModelList.clear();
+        //Refreshing data on server
+        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Listener<JSONObject>) this, this);
+        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(jsonRequest);
+        offset=0;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_discover, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id==R.id.sort){
+            toSort();
+        }
+        if(id==R.id.bookmark){
+            Log.d("note", "BOOKMARK BUTTON");
+            toBookMark();
+        }
+        if(id==R.id.about){
+            /**String uri = "https://youtu.be/3qibE1yyL3c"; //changed video link
+             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+             startActivity(intent);*/
+            toAbout();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void toSort(){
+        Intent intent = new Intent(getActivity(), SortPreferences.class);
+        startActivity(intent);
+    }
+    private void toBookMark() {
+        Intent intent = new Intent(getActivity(), Bookmark.class);
+        intent.putExtra("delete", false);
+        startActivity(intent);
+    }
+    private void toAbout() {
+        Intent intent = new Intent(getActivity(), About.class);
+        startActivity(intent);
+    }
+
     private void loadMore() {
         // Execute LoadMoreDataTask AsyncTask
         offset=offset+64;
-
         //String url = "http://104.199.155.15/api/v2/db/_table/dugem?limit="+limit+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
         String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+limit+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Listener<JSONObject>) this, this);
@@ -200,4 +269,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
             e.printStackTrace();
         }
     }
+
+
+
 }

@@ -110,28 +110,6 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        if(id==R.id.bookmark){
-            Log.d("note", "BOOKMARK BUTTON");
-            toBookMark();
-        }
-        if(id==R.id.about){
-            /**String uri = "https://youtu.be/3qibE1yyL3c"; //changed video link
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-            startActivity(intent);*/
-            toAbout();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onBackPressed() {
@@ -168,14 +146,18 @@ public class MainActivity extends AppCompatActivity{
             alertDialog.show();
         }
     }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        SharedPreferences prefs = getBaseContext().getSharedPreferences(
+                "prefs", getApplicationContext().MODE_PRIVATE);
+        String sortPreferences = "&order=eventTimestamp%20ASC";
+        prefs.edit().putBoolean("dateAsc", true).apply();
+        prefs.edit().putBoolean("dateDesc", false).apply();
+        prefs.edit().putBoolean("priceAsc", false).apply();
+        prefs.edit().putBoolean("priceDesc", false).apply();
+        prefs.edit().putString("sortPreferences", sortPreferences).apply();
+    }
 
-    private void toBookMark() {
-        Intent intent = new Intent(this, Bookmark.class);
-        intent.putExtra("delete", false);
-        startActivity(intent);
-    }
-    private void toAbout() {
-        Intent intent = new Intent(this, About.class);
-        startActivity(intent);
-    }
+
 }

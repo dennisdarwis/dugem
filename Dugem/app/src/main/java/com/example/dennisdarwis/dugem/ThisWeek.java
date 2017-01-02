@@ -2,6 +2,7 @@
 // Written for SIT207 Android Programing 2nd Assignment
 package com.example.dennisdarwis.dugem;
 
+import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -42,6 +46,7 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_this_week, container, false);
+        setHasOptionsMenu(true);
         requestQueue = Volley.newRequestQueue(getContext());
         String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?api_key=62220ea2b6d61eb7aca380d40801ffccbc08bec358c72843023f626774493ac9&order=eventTimestamp%20ASC";
         listView = (ListView) view.findViewById(R.id.listView);
@@ -85,6 +90,37 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
             }
         });
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id==R.id.bookmark){
+            Log.d("note", "BOOKMARK BUTTON");
+            toBookMark();
+        }
+        if(id==R.id.about){
+            /**String uri = "https://youtu.be/3qibE1yyL3c"; //changed video link
+             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+             startActivity(intent);*/
+            toAbout();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void toBookMark() {
+        Intent intent = new Intent(getActivity(), Bookmark.class);
+        intent.putExtra("delete", false);
+        startActivity(intent);
+    }
+    private void toAbout() {
+        Intent intent = new Intent(getActivity(), About.class);
+        startActivity(intent);
     }
 
     @Override

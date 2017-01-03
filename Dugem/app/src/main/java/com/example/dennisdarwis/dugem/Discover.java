@@ -110,16 +110,16 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         if(eventModelList.size() == 0){
             eventModelList.clear();
-            listViewAdapter.notifyDataSetChanged();
+            //listViewAdapter.notifyDataSetChanged();
             requestQueue.add(jsonRequest);
             offset=0;
         }
         if(bundle!=null){
             eventModelList.clear();
-            listViewAdapter.notifyDataSetChanged();
+            //listViewAdapter.notifyDataSetChanged();
             fromSortPrefs = bundle.getBoolean("fromSortPrefs", false);
             if(fromSortPrefs){
-                final SharedPreferences prefs = getActivity().getSharedPreferences(
+                SharedPreferences prefs = getActivity().getSharedPreferences(
                         "prefs", getActivity().getApplicationContext().MODE_PRIVATE);
                 sortPreferences = prefs.getString("sortPreferences", "&order=eventTimestamp%20ASC");
                 reload(sortPreferences);
@@ -128,7 +128,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
             // the CustomJSONObjectRequest is put into requestQueue for process.
             if(eventModelList.size() == 0){
                 eventModelList.clear();
-                listViewAdapter.notifyDataSetChanged();
+                //listViewAdapter.notifyDataSetChanged();
                 requestQueue.add(jsonRequest);
                 offset=0;
             }
@@ -142,10 +142,15 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
                 // in every request, the List must be emptied first, to avoid duplication
                 eventModelList.clear();
                 listViewAdapter.notifyDataSetChanged();
+                /**
+                SharedPreferences prefs = getActivity().getSharedPreferences(
+                        "prefs", getActivity().getApplicationContext().MODE_PRIVATE);
+                sortPreferences = prefs.getString("sortPreferences", "&order=eventTimestamp%20ASC");
                 //Refreshing data on server
                 jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 requestQueue.add(jsonRequest);
-                offset=0;
+                offset=0;*/
+                reload(sortPreferences);
             }
         });
 

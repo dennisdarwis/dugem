@@ -112,7 +112,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
 
         //listView.setSelection(eventModelList.size()-6);
         // String URL
-        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+"&order=eventTimestamp%20DESC";
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+sortPreferences;
         // CustomJSONObjectRequest as jsonRequest, contains headers required for API Request
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Listener<JSONObject>) this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
@@ -204,7 +204,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
         // Execute LoadMoreDataTask AsyncTask
         offset=offset+64;
         //String url = "http://104.199.155.15/api/v2/db/_table/dugem?limit="+limit+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
-        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+limit+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+sortPreferences;
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Listener<JSONObject>) this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(jsonRequest);

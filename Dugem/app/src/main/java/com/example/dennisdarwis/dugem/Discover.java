@@ -40,7 +40,7 @@ import java.util.List;
 public class Discover extends Fragment implements Response.ErrorListener, Listener<JSONObject> {
 
     static List<EventModel> eventModelList = new ArrayList<>();
-    private ListViewAdapter listViewAdapter;
+    static ListViewAdapter listViewAdapter;
     private ListView listView;
     private RequestQueue requestQueue;
     private SwipeRefreshLayout swipeRefreshLayout = null;
@@ -89,6 +89,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
                 }
             }
         });
+
         // the listviewadapter takes the events data from eventModelList
         listViewAdapter = new ListViewAdapter(getActivity(), eventModelList);
         // the listviewadapter that contains the events data from eventModelList will be adapted into listview
@@ -101,13 +102,21 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
         }
 
         //listView.setSelection(eventModelList.size()-6);
+
         // String URL
         String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+sortPreferences;
         // CustomJSONObjectRequest as jsonRequest, contains headers required for API Request
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Listener<JSONObject>) this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
+        if(eventModelList.size() == 0){
+            eventModelList.clear();
+            listViewAdapter.notifyDataSetChanged();
+            requestQueue.add(jsonRequest);
+            offset=0;
+        }
         if(bundle!=null){
+            eventModelList.clear();
+            listViewAdapter.notifyDataSetChanged();
             fromSortPrefs = bundle.getBoolean("fromSortPrefs", false);
             if(fromSortPrefs){
                 final SharedPreferences prefs = getActivity().getSharedPreferences(
@@ -118,6 +127,8 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
         } else{
             // the CustomJSONObjectRequest is put into requestQueue for process.
             if(eventModelList.size() == 0){
+                eventModelList.clear();
+                listViewAdapter.notifyDataSetChanged();
                 requestQueue.add(jsonRequest);
                 offset=0;
             }
@@ -130,6 +141,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
             public void onRefresh() {
                 // in every request, the List must be emptied first, to avoid duplication
                 eventModelList.clear();
+                listViewAdapter.notifyDataSetChanged();
                 //Refreshing data on server
                 jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 requestQueue.add(jsonRequest);

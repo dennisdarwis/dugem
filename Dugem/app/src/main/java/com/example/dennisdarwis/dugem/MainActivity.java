@@ -4,31 +4,19 @@
 package com.example.dennisdarwis.dugem;
 
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -46,7 +34,7 @@ public class MainActivity extends AppCompatActivity{
         SharedPreferences prefs = this.getSharedPreferences(
                 "prefs", getApplicationContext().MODE_PRIVATE);
         Boolean responsible = prefs.getBoolean("responsible",false);
-        Log.d("RESPONSIBLE", responsible.toString());
+        //Log.d("RESPONSIBLE", responsible.toString());
         if(!responsible){
             // Every the app is launched, the alert dialog pops up to verify if user is 18+ or not
             alertDialog.setTitle("Are you responsible yet?");

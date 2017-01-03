@@ -89,14 +89,14 @@ public class ListViewAdapterDatabase extends BaseAdapter {
 
             @Override
             public void onClick(View view) {
-                Log.d("tot", eventModel.getEventDetails());
+                //Log.d("tot", eventModel.getEventDetails());
                 toEventDetail(eventModel);
             }
         });
         event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("tot", eventModel.getEventDetails());
+                //Log.d("tot", eventModel.getEventDetails());
                 toEventDetail(eventModel);
             }
         });

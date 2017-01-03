@@ -5,8 +5,6 @@ package com.example.dennisdarwis.dugem;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +16,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -33,7 +30,6 @@ public class ListViewAdapter extends BaseAdapter {
     private Activity activity;
     private List<EventModel> eventModelList;
     private LayoutInflater inflater;
-    DBHandler dbHandler;
 
     public ListViewAdapter(Activity activity, List<EventModel> eventModelList){
         this.activity = activity;
@@ -96,14 +92,14 @@ public class ListViewAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View view) {
-                Log.d("tot", eventModel.getEventDetails());
+                //Log.d("tot", eventModel.getEventDetails());
                 toEventDetail(eventModel);
             }
         });
         event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("tot", eventModel.getEventDetails());
+                //Log.d("tot", eventModel.getEventDetails());
                 toEventDetail(eventModel);
             }
         });

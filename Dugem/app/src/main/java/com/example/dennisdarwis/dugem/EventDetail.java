@@ -14,10 +14,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,7 +24,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
 
 import java.sql.Date;
 import java.text.DateFormatSymbols;
@@ -182,7 +179,7 @@ public class EventDetail extends AppCompatActivity {
             return true;
         }
         if(id==R.id.addtobookmark){
-            Log.d("TOT", eventModel.getEventName());
+            //Log.d("TOT", eventModel.getEventName());
             // adding the datamodel into the phone's DBHandler local database
             dbHandler = new DBHandler(getApplicationContext());
             dbHandler.addEvent(eventModel);
@@ -192,7 +189,7 @@ public class EventDetail extends AppCompatActivity {
                     .show();
         }
         if(id==R.id.deletebookmark){
-            Log.d("TOT", eventModel.getEventName());
+            //Log.d("TOT", eventModel.getEventName());
             dbHandler = new DBHandler(getApplicationContext());
             // to delete event data from bookmark
             dbHandler.deleteEvent(eventModel);

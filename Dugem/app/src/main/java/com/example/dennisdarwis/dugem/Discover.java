@@ -4,13 +4,12 @@ package com.example.dennisdarwis.dugem;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
+
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.util.EventLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,31 +19,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class Discover extends Fragment implements Response.ErrorListener, Listener<JSONObject> {
@@ -93,7 +83,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
             private void isScrollCompleted() {
                 if (totalItem - currentFirstVisibleItem == currentVisibleItemCount
                         && this.currentScrollState == SCROLL_STATE_IDLE && totalItem != total) {
-                    Log.d("TOTALITEM", String.valueOf(totalItem)+" "+String.valueOf(currentFirstVisibleItem));
+                    //Log.d("TOTALITEM", String.valueOf(totalItem)+" "+String.valueOf(currentFirstVisibleItem));
                     swipeRefreshLayout.setRefreshing(true);
                     loadMore();
                 }
@@ -104,10 +94,10 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
         // the listviewadapter that contains the events data from eventModelList will be adapted into listview
         listView.setAdapter(listViewAdapter);
         if(state != null) {
-            Log.d("BLABLA", "trying to restore listview state..");
+            //Log.d("BLABLA", "trying to restore listview state..");
             listView.onRestoreInstanceState(state);
         } else{
-            Log.d("BLABLA", "HALAH KUNTUL ");
+            //Log.d("BLABLA", "HALAH KUNTUL ");
         }
 
         //listView.setSelection(eventModelList.size()-6);
@@ -175,7 +165,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
             toSort();
         }
         if(id==R.id.bookmark){
-            Log.d("note", "BOOKMARK BUTTON");
+            //Log.d("note", "BOOKMARK BUTTON");
             toBookMark();
         }
         if(id==R.id.about){
@@ -230,13 +220,13 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
             JSONArray jsonArray = response.getJSONArray("resource");
             JSONObject jsonObject = response.getJSONObject("meta");
             total = jsonObject.getInt("count");
-            Log.d("TOTAL", String.valueOf(total)+" "+jsonArray.length());
+            //Log.d("TOTAL", String.valueOf(total)+" "+jsonArray.length());
             for (int i=0; i < jsonArray.length(); i++){
                 // each object will be parsed
                 JSONObject resource = jsonArray.getJSONObject(i);
                 // parsing every variable of events.
                 int id = resource.getInt("id");
-                Log.d("id", String.valueOf(id));
+                //Log.d("id", String.valueOf(id));
                 Double eventPrice = resource.getDouble("eventPrice");
                 String eventName = resource.getString("eventName");
                 String imageUrl = resource.getString("imageUrl");
@@ -256,9 +246,9 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
                 EventModel data = new EventModel(id, venueId, eventPrice, eventName, imageUrl, eventUrl, venueName, address, contact, eventDetails, eventTimestamp, eventTimeStart, eventTimeEnd, latitude, longitude, city);
                 // each data model will be put into the list
                 eventModelList.add(data);
-                Log.d("DATA", data.toString());
+                //Log.d("DATA", data.toString());
             }
-            Log.d("tot", "TOTSKI: "+eventModelList.toString());
+            //Log.d("tot", "TOTSKI: "+eventModelList.toString());
             // notifyDataSetChanged(), to change into another added data to list of data
             listViewAdapter.notifyDataSetChanged();
             // once the request is complete, the refresh animation is stopped

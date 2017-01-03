@@ -2,8 +2,6 @@
 // Written for SIT207 Android Programing 2nd Assignment
 package com.example.dennisdarwis.dugem;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.sql.Date;

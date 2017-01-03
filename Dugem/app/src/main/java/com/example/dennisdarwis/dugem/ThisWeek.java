@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,7 +59,7 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
                     if (listView.getLastVisiblePosition() >= count
                             - threshold) {
                         // Execute LoadMoreDataTask AsyncTask
-                        Log.d("MENTOK", "MENTOK: ");
+                        //Log.d("MENTOK", "MENTOK: ");
                     }
                 }
             }
@@ -71,10 +70,10 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
             }
         });
         if(state != null) {
-            Log.d("BLABLA", "trying to restore listview state..");
+            //Log.d("BLABLA", "trying to restore listview state..");
             listView.onRestoreInstanceState(state);
         } else{
-            Log.d("BLABLA", "HALAH KUNTUL ");
+            //Log.d("BLABLA", "HALAH KUNTUL ");
         }
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Response.Listener<JSONObject>) this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
@@ -102,7 +101,7 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id==R.id.bookmark){
-            Log.d("note", "BOOKMARK BUTTON");
+            //Log.d("note", "BOOKMARK BUTTON");
             toBookMark();
         }
         if(id==R.id.about){
@@ -132,7 +131,7 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Log.d("Error:",error.toString());
+        //Log.d("Error:",error.toString());
     }
 
     @Override
@@ -164,14 +163,14 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
                     Double latitude = resource.getDouble("latitude");
                     Double longitude = resource.getDouble("longitude");
                     String city = resource.getString("city");
-                    Log.d("ASU", "onResponse: "+eventName);
+                    //Log.d("ASU", "onResponse: "+eventName);
                     EventModel data = new EventModel(id, venueId, eventPrice, eventName, imageUrl, eventUrl, venueName, address, contact, eventDetails, eventTimestamp, eventTimeStart, eventTimeEnd, latitude, longitude, city);
                     eventModelList.add(data);
-                    Log.d("DATA", data.toString());
+                    //Log.d("DATA", data.toString());
                 }
 
             }
-            Log.d("tot", "TOT: "+eventModelList.toString());
+            //Log.d("tot", "TOT: "+eventModelList.toString());
             listViewAdapter = new ListViewAdapter(getActivity(), eventModelList);
             listView.setAdapter(listViewAdapter);
             if (swipeRefreshLayout.isRefreshing()) {

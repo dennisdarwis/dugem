@@ -140,8 +140,8 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
             @Override
             public void onRefresh() {
                 // in every request, the List must be emptied first, to avoid duplication
-                eventModelList.clear();
-                listViewAdapter.notifyDataSetChanged();
+                //eventModelList.clear();
+                //listViewAdapter.notifyDataSetChanged();
                 /**
                 SharedPreferences prefs = getActivity().getSharedPreferences(
                         "prefs", getActivity().getApplicationContext().MODE_PRIVATE);

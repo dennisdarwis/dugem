@@ -4,7 +4,7 @@
     tools:context="com.example.dennisdarwis.dugem.MainActivity">
     <item
         android:id="@+id/addtobookmark"
-        android:icon="@drawable/ic_note_add_white_48dp"
+        android:icon="@drawable/ic_note_add_white_24dp"
         android:orderInCategory="101"
         android:title="@string/add_to_bookmark"
         app:showAsAction="always" />

@@ -33,7 +33,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -51,11 +53,19 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
     static Parcelable state;
     Boolean fromSortPrefs;
     static String sortPreferences = "&order=eventTimestamp%20ASC";
+    static String oneWeekBefore;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_discover, container, false);
         setHasOptionsMenu(true);
+        Calendar time = Calendar.getInstance();
+        time.add(Calendar.DATE,-7);
+        SimpleDateFormat timeConverter = new SimpleDateFormat("yyyy-MM-dd");
+        oneWeekBefore = timeConverter.format(time.getTime());
+        //Log.d("KALENDAR", String.valueOf(oneWeekBefore));
+        //Calendar nextWeek = Calendar.getInstance();
+        //nextWeek.add(Calendar.DATE,7);
         Bundle bundle = getActivity().getIntent().getExtras();
         //creating new requestQueue, to get event objects from google cloud
         requestQueue = Volley.newRequestQueue(getContext());
@@ -104,7 +114,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
         //listView.setSelection(eventModelList.size()-6);
 
         // String URL
-        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+sortPreferences;
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+sortPreferences+"&filter=eventTimestamp%20%3E%3D%20"+oneWeekBefore;
         // CustomJSONObjectRequest as jsonRequest, contains headers required for API Request
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Listener<JSONObject>) this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
@@ -159,7 +169,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
     }
 
     private void reload(String sortPreferences) {
-        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+sortPreferences;
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+sortPreferences+"&filter=eventTimestamp%20%3E%3D%20"+oneWeekBefore;
         // in every request, the List must be emptied first, to avoid duplication
         eventModelList.clear();
         //Refreshing data on server
@@ -211,7 +221,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
         // Execute LoadMoreDataTask AsyncTask
         offset=offset+64;
         //String url = "http://104.199.155.15/api/v2/db/_table/dugem?limit="+limit+"&offset="+String.valueOf(offset)+"&order=eventTimestamp%20DESC&include_count=true";
-        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+sortPreferences;
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?limit="+String.valueOf(limit)+"&offset="+String.valueOf(offset)+"&include_count=true"+sortPreferences+"&filter=eventTimestamp%20%3E%3D%20"+oneWeekBefore;
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), (Listener<JSONObject>) this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(jsonRequest);

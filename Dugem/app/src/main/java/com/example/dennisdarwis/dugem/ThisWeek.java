@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -47,7 +48,13 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
         View view = inflater.inflate(R.layout.activity_this_week, container, false);
         setHasOptionsMenu(true);
         requestQueue = Volley.newRequestQueue(getContext());
-        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?api_key=62220ea2b6d61eb7aca380d40801ffccbc08bec358c72843023f626774493ac9&order=eventTimestamp%20ASC";
+        SimpleDateFormat timeConverter = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar timeToday = Calendar.getInstance();
+        String today= timeConverter.format(timeToday.getTime());
+        Calendar timeWeekAfter = Calendar.getInstance();
+        timeWeekAfter.add(Calendar.DATE,7);
+        String oneWeekAfter = timeConverter.format(timeWeekAfter.getTime());
+        String url = "http://130.211.249.152/api/v2/mysql/_table/dugem?api_key=62220ea2b6d61eb7aca380d40801ffccbc08bec358c72843023f626774493ac9&order=eventTimestamp%20ASC&filter=(eventTimestamp%20%3E%3D%20"+today+")%20AND%20(eventTimestamp%20%3C%3D%20"+oneWeekAfter+")";
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -147,27 +154,25 @@ public class ThisWeek extends Fragment implements Response.ErrorListener, Respon
             for (int i=0; i < jsonArray.length(); i++){
                 JSONObject resource = jsonArray.getJSONObject(i);
                 Date eventTimestamp = Date.valueOf(resource.getString("eventTimestamp"));
-                if(eventTimestamp.after(currentTime.getTime()) && eventTimestamp.before(nextWeek.getTime())){
-                    int id = resource.getInt("id");
-                    Double eventPrice = resource.getDouble("eventPrice");
-                    String eventName = resource.getString("eventName");
-                    String imageUrl = resource.getString("imageUrl");
-                    String eventUrl = resource.getString("eventUrl");
-                    String venueName = resource.getString("venueName");
-                    String address = resource.getString("address");
-                    String contact = resource.getString("contact");
-                    String eventDetails = resource.getString("eventDetails");
-                    int venueId = resource.getInt("venueId");
-                    String eventTimeStart = resource.getString("eventTimeStart");
-                    String eventTimeEnd = resource.getString("eventTimeEnd");
-                    Double latitude = resource.getDouble("latitude");
-                    Double longitude = resource.getDouble("longitude");
-                    String city = resource.getString("city");
-                    //Log.d("ASU", "onResponse: "+eventName);
-                    EventModel data = new EventModel(id, venueId, eventPrice, eventName, imageUrl, eventUrl, venueName, address, contact, eventDetails, eventTimestamp, eventTimeStart, eventTimeEnd, latitude, longitude, city);
-                    eventModelList.add(data);
-                    //Log.d("DATA", data.toString());
-                }
+                int id = resource.getInt("id");
+                Double eventPrice = resource.getDouble("eventPrice");
+                String eventName = resource.getString("eventName");
+                String imageUrl = resource.getString("imageUrl");
+                String eventUrl = resource.getString("eventUrl");
+                String venueName = resource.getString("venueName");
+                String address = resource.getString("address");
+                String contact = resource.getString("contact");
+                String eventDetails = resource.getString("eventDetails");
+                int venueId = resource.getInt("venueId");
+                String eventTimeStart = resource.getString("eventTimeStart");
+                String eventTimeEnd = resource.getString("eventTimeEnd");
+                Double latitude = resource.getDouble("latitude");
+                Double longitude = resource.getDouble("longitude");
+                String city = resource.getString("city");
+                //Log.d("ASU", "onResponse: "+eventName);
+                EventModel data = new EventModel(id, venueId, eventPrice, eventName, imageUrl, eventUrl, venueName, address, contact, eventDetails, eventTimestamp, eventTimeStart, eventTimeEnd, latitude, longitude, city);
+                eventModelList.add(data);
+                //Log.d("DATA", data.toString());
 
             }
             //Log.d("tot", "TOT: "+eventModelList.toString());

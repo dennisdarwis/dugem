@@ -4,7 +4,7 @@
     tools:context="com.example.dennisdarwis.dugem.MainActivity">
     <item
         android:id="@+id/deletebookmark"
-        android:icon="@drawable/ic_delete_white_48dp"
+        android:icon="@drawable/ic_delete_white_24dp"
         android:orderInCategory="100"
         android:title="DELETE FROM BOOKMARK"
         app:showAsAction="always" />

@@ -33,27 +33,7 @@ public class MainActivity extends AppCompatActivity{
         android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(this);
         SharedPreferences prefs = this.getSharedPreferences(
                 "prefs", getApplicationContext().MODE_PRIVATE);
-        Boolean responsible = prefs.getBoolean("responsible",false);
-        //Log.d("RESPONSIBLE", responsible.toString());
-        if(!responsible){
-            // Every the app is launched, the alert dialog pops up to verify if user is 18+ or not
-            alertDialog.setTitle("Are you responsible yet?");
 
-            alertDialog.setMessage("Are you aged 18+?");
-            alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    onBackPressed();
-                }
-            });
-            alertDialog.setPositiveButton("YES, I'M 18+", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int which) {
-                    SharedPreferences prefs = getBaseContext().getSharedPreferences(
-                            "prefs", getApplicationContext().MODE_PRIVATE);
-                    prefs.edit().putBoolean("responsible", true).commit();
-                }
-            });
-            alertDialog.show();
-        }
 
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -107,33 +87,7 @@ public class MainActivity extends AppCompatActivity{
         moveTaskToBack(true);
     }
     // after the application is minimized and then resume, it asks the user again if there are aged 18+
-    @Override
-    public void onResume(){
-        super.onResume();
-        SharedPreferences prefs = this.getSharedPreferences(
-                "prefs", getApplicationContext().MODE_PRIVATE);
-        Boolean responsible = prefs.getBoolean("responsible",false);
-        android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(this);
-        if(!responsible){
-            // Every the app is launched, the alert dialog pops up to verify if user is 18+ or not
-            alertDialog.setTitle("Are you responsible yet?");
 
-            alertDialog.setMessage("Are you aged 18+?");
-            alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    onBackPressed();
-                }
-            });
-            alertDialog.setPositiveButton("YES, I'M 18+", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int which) {
-                    SharedPreferences prefs = getBaseContext().getSharedPreferences(
-                            "prefs", getApplicationContext().MODE_PRIVATE);
-                    prefs.edit().putBoolean("responsible", true).commit();
-                }
-            });
-            alertDialog.show();
-        }
-    }
     @Override
     public void onDestroy(){
         super.onDestroy();

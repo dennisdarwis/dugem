@@ -11,6 +11,8 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 public class ViewImage extends AppCompatActivity {
 
     @Override
@@ -26,6 +28,7 @@ public class ViewImage extends AppCompatActivity {
         String imageUrl = bundle.getString("eventImageUrl", "null");
         ImageView eventImage = (ImageView) findViewById(R.id.eventImage);
         Picasso.with(this.getApplicationContext()).load(imageUrl).into(eventImage);
+        PhotoViewAttacher mAttacher = new PhotoViewAttacher(eventImage);
 
     }
 

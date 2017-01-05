@@ -15,4 +15,5 @@
     <string name="title_activity_about">About</string>
     <string name="sort">Sort</string>
     <string name="title_activity_sort_preferences">SortPreferences</string>
+    <string name="title_activity_view_image">ViewImage</string>
 </resources>

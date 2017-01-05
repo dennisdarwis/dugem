@@ -55,6 +55,12 @@ public class EventDetail extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ImageView eventImage = (ImageView) findViewById(R.id.eventImage);
         Picasso.with(this.getApplicationContext()).load(eventModel.getImageUrl()).into(eventImage);
+        eventImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewImage(eventModel.getImageUrl());
+            }
+        });
         TextView textEventName = (TextView) findViewById(R.id.textEventName);
         textEventName.setText(eventModel.getEventName());
         TextView textEventPrice = (TextView) findViewById(R.id.textEventPrice);
@@ -145,6 +151,12 @@ public class EventDetail extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void viewImage(String imageUrl) {
+        Intent intent = new Intent(this, ViewImage.class);
+        intent.putExtra("eventImageUrl", imageUrl);
+        startActivity(intent);
     }
 
 

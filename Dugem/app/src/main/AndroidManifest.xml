@@ -53,6 +53,10 @@
             android:name=".SortPreferences"
             android:label="@string/title_activity_sort_preferences"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ViewImage"
+            android:label="@string/title_activity_view_image"
             android:theme="@style/AppTheme"></activity>
     </application>
 

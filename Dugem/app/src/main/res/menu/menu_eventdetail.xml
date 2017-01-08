@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.dennisdarwis.dugem.MainActivity">
+    tools:context="com.dugem.dugem.MainActivity">
     <item
         android:id="@+id/addtobookmark"
         android:icon="@drawable/ic_note_add_white_24dp"

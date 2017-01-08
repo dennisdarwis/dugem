@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.dennisdarwis.dugem.Bookmark"
+    tools:context="com.dugem.dugem.Bookmark"
     tools:showIn="@layout/activity_bookmark"
     android:orientation="vertical"
     android:background="#212121">

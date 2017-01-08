@@ -6,7 +6,7 @@
     android:paddingBottom="5dp"
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
-    tools:context="com.example.dennisdarwis.dugem.ThisWeek"
+    tools:context="com.dugem.dugem.ThisWeek"
     android:orientation="vertical"
     android:background="#212121">
     <android.support.v4.widget.SwipeRefreshLayout

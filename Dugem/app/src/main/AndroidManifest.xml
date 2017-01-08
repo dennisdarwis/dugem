@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dennisdarwis.dugem">
+    package="com.dugem.dugem">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -37,7 +37,7 @@
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.dennisdarwis.dugem.MainActivity" />
+                android:value="com.dugem.dugem.MainActivity" />
         </activity>
         <activity
             android:name=".Bookmark"

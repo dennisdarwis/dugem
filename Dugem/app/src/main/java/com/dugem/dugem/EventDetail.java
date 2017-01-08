@@ -1,6 +1,6 @@
 // Dennis Darwis 216280619
 // Written for SIT207 Android Programing 2nd Assignment
-package com.example.dennisdarwis.dugem;
+package com.dugem.dugem;
 
 
 import android.content.ClipData;

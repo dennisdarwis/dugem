@@ -1,11 +1,10 @@
 // Dennis Darwis 216280619
 // Written for SIT207 Android Programing 2nd Assignment
 
-package com.example.dennisdarwis.dugem;
+package com.dugem.dugem;
 
 import android.annotation.TargetApi;
 import android.content.SharedPreferences;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
@@ -13,7 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 

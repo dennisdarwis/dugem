@@ -1,13 +1,12 @@
 // Dennis Darwis 216280619
 // Written for SIT207 Android Programing 2nd Assignment
-package com.example.dennisdarwis.dugem;
+package com.dugem.dugem;
 
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;

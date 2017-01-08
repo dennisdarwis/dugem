@@ -1,6 +1,6 @@
 // Dennis Darwis 216280619
 // Written for SIT207 Android Programing 2nd Assignment
-package com.example.dennisdarwis.dugem;
+package com.dugem.dugem;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -60,7 +60,7 @@ public class Discover extends Fragment implements Response.ErrorListener, Listen
         View view = inflater.inflate(R.layout.activity_discover, container, false);
         setHasOptionsMenu(true);
         Calendar time = Calendar.getInstance();
-        time.add(Calendar.DATE,-7);
+        time.add(Calendar.DATE,-3);
         SimpleDateFormat timeConverter = new SimpleDateFormat("yyyy-MM-dd");
         oneWeekBefore = timeConverter.format(time.getTime());
         //Log.d("KALENDAR", String.valueOf(oneWeekBefore));

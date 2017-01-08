@@ -1,11 +1,10 @@
 // Dennis Darwis 216280619
 // Written for SIT207 Android Programing 2nd Assignment
-package com.example.dennisdarwis.dugem;
+package com.dugem.dugem;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-
 import java.io.Serializable;
 import java.sql.Date;
 import java.text.DateFormatSymbols;
@@ -24,14 +22,15 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by dennisdarwis on 10/3/16.
+ * Created by dennisdarwis on 10/9/16.
  */
-public class ListViewAdapter extends BaseAdapter {
+public class ListViewAdapterDatabase extends BaseAdapter {
+    //Every code is same like ListViewAdapter except for toEventDetail
     private Activity activity;
     private List<EventModel> eventModelList;
     private LayoutInflater inflater;
 
-    public ListViewAdapter(Activity activity, List<EventModel> eventModelList){
+    public ListViewAdapterDatabase(Activity activity, List<EventModel> eventModelList){
         this.activity = activity;
         this.eventModelList = eventModelList;
     }
@@ -56,12 +55,10 @@ public class ListViewAdapter extends BaseAdapter {
         if (inflater == null) {
             inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }if(view == null){
-            // ListViewAdapter is using list_view layout.
             view = inflater.inflate(R.layout.list_view, null);
         }
         LinearLayout event = (LinearLayout) view.findViewById(R.id.event);
         TextView textDate = (TextView) view.findViewById(R.id.textDate);
-
         TextView textEventName = (TextView) view.findViewById(R.id.textEventName);
         TextView textEventVenue = (TextView) view.findViewById(R.id.textEventVenue);
         TextView textEventPrice = (TextView) view.findViewById(R.id.textEventPrice);
@@ -75,7 +72,6 @@ public class ListViewAdapter extends BaseAdapter {
         int date = cal.get(Calendar.DAY_OF_MONTH);
         int year = cal.get(Calendar.YEAR);
         textDate.setText(String.valueOf(date)+" "+new DateFormatSymbols().getMonths()[month]+" "+String.valueOf(year));
-
         textEventName.setText(eventModel.getEventName());
         textEventVenue.setText(eventModel.getVenueName());
 
@@ -106,11 +102,11 @@ public class ListViewAdapter extends BaseAdapter {
         return view;
     }
 
-
     private void toEventDetail(EventModel eventModel) {
         Intent intent = new Intent(activity, EventDetail.class);
-        // the serialized eventModel will be put for EventDetail activity
         intent.putExtra("eventModel", (Serializable) eventModel);
+        // boolean isBookmark is needed for EventDetail, to ensure that the action button for EventButton is for deleting the bookmark.
+        intent.putExtra("isBookmark", true);
         activity.startActivity(intent);
     }
 

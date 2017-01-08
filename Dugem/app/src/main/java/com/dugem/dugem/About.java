@@ -1,4 +1,4 @@
-package com.example.dennisdarwis.dugem;
+package com.dugem.dugem;
 
 import android.os.Bundle;
 

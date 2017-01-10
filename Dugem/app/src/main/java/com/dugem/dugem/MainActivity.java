@@ -32,10 +32,13 @@ public class MainActivity extends AppCompatActivity{
         SharedPreferences prefs = this.getSharedPreferences(
                 "prefs", getApplicationContext().MODE_PRIVATE);
 
-
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(Color.BLACK);
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            // Do something for lollipop and above versions
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
+        }
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
